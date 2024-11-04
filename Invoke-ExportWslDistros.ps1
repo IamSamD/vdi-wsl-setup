@@ -42,4 +42,4 @@ foreach ($Distro in $Distros) {
     Write-Host "`nSuccessful`n" -ForegroundColor Green 
 }
 
-Write-Host "Successfully exported all distros to $ExportPath"
+Write-Host "Successfully exported all distros to $ExportPath" -ForegroundColor Green
