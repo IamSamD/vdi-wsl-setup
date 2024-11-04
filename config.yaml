@@ -1,0 +1,9 @@
+seeddistro:
+  name: Ubuntu-20.04
+  exportpath: C:\wsl-distros
+distros:
+  - distro1
+  - distro2
+sudousers:
+  - user1
+  - distro2
