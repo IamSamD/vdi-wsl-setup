@@ -17,14 +17,23 @@ Write-Host @"
                                          |_|                            
 "@
 
-Write-Host "Getting required modules..." -ForegroundColor Cyan
-Save-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Path ".\modules"
-Import-Module -Name ".\modules\powershell-yaml\0.4.7\powershell-yaml.psm1"
-Write-Host "Required modules installed`n" -ForegroundColor Green
+# Set up modules
+Write-Host "Importing required modules..." -ForegroundColor Cyan
 
+if (-not(Test-Path -Path ".\modules\powershell-yaml\0.4.7\powershell-yaml.psm1")) {
+    Save-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Path ".\modules"
+}
+Import-Module -Name ".\modules\powershell-yaml\0.4.7\powershell-yaml.psm1"
+
+Write-Host "Required modules imported`n" -ForegroundColor Green
+
+# Load config
 Write-Host "Loading config..." -ForegroundColor Cyan
+
 $Config = Get-Content -Path .\config.yaml | ConvertFrom-Yaml
+
 Write-Host "Config loaded`n" -ForegroundColor Green
+
 
 $Distros = @($Config.distros)
 $SeedDistro = $Config.seeddistro.name
