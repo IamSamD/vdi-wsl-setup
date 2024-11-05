@@ -35,11 +35,12 @@ $Config = Get-Content -Path .\config.yaml | ConvertFrom-Yaml
 Write-Host "Config loaded`n" -ForegroundColor Green
 
 $Distros = @($Config.distros)
+$ExportLocation = $Config.export.exportpath
 $InstallLocation = $Config.import.installlocation
 
 foreach ($Distro in $Distros) {
     Write-Host "Importing distribution $Dist..." -ForegroundColor Cyan
-    $Output = wsl --import $Dist $InstallLocation "$($Dist).tar"
+    $Output = wsl --import $Dist $InstallLocation "$($ExportLocation)/$($Dist).tar"
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Error importing distribution: $Dist - $Output"
         $LASTEXITCODE = 0
