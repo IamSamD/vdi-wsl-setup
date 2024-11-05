@@ -1,11 +1,35 @@
 export:
-  seeddistro: Ubuntu-20.04
-  exportpath: C:\wsl-distros
+  seeddistro: Ubuntu-24.04
+  exportpath: C:\Ubuntu
 import:
-  installlocation: C:\install-location
+  installlocation: C:\Ubuntu\Installs
 distros:
-  - distro1
-  - distro2
+  #UK Pod
+  - sdpay
+  - smpay
+  - mhpay
+  - gvpay
+
+  #India Pod
+  - vkpay
+  - vikpay
+  - mppay
+  - rjpay
+  - rmpay
+
+  #US Pod
+  - cwpay
+  - cypay
+  - hvpay
+  
 sudousers:
-  - user1
-  - distro2
+    #UK Pod
+  - sdpay
+  - smpay
+
+  #India Pod
+  - vkpay
+  - vikpay
+  - mppay
+  - rjpay
+  - rmpay
