@@ -6,11 +6,9 @@ We have the need to set up WSL on a multi-user VDI.
 
 To acheive this we create a 'main' distribution which we configure with the initial sudo user.
 
-We export the main distribution for each user that needs one. 
+We export the main distribution. 
 
-The distribution name should be the same as the user that will use it. 
-
-We then import each distribution, one per user and run a script via WSL to set up the user in their distro
+We then import a distribution for each user and run scripts via WSL to set up the user in their distro and the local software they need. 
 
 If a user is as admin and should have sudo on their distribution, you can add them to the `sudousers` list in the config file. 
 
@@ -57,17 +55,39 @@ List of users who should be in the sudo group on their own distribution.
 
 ## Usage
 
+On the VDI we have a WSL Ubuntu distribution `Ubuntu-24.04`
+This is the 'main' distribution that is effectively our 'master image' for WSL.
+
+We configure this distribution with any tools that should be installed globally for all users (kubectl, k9s, pwsh, etc)
+This distro has the payuk-ubuntu user which has sudo access and is the admin account. 
+
+We then export this main distribution and import and instance of it for each user that needs one.
+
+We then run scripts on each users instance for setting up the user account with a random temp password and the local tools like tfenv, nvm and chezmoi. 
+
+After the main image has been configured the process of exporting the image, creating distros for each user and setting up those distros is all automated with scripts. 
+
+Once you are happy with the main image the process is as follows:
+
 - Set up your config file with the desired values
 - Run the scripts in the following order
 
+Export the main distro
 ``` powershell
 .\Invoke-ExportDistros.ps1
 ```
 
+Import a distro for each user that needs one
 ``` powershell
 .\Invoke-ImportDistros.ps1
 ```
 
+Set up the users on each distro
 ``` powershell
-.\Invoke-WslSetup.ps1
+.\Invoke-WslSetupUsers.ps1
+```
+
+Set up local software for each distro
+``` powershell
+.\Invoke-WslSetupSoftware.ps1
 ```
