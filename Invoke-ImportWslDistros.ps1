@@ -39,15 +39,15 @@ $ExportLocation = $Config.export.exportpath
 $InstallLocation = $Config.import.installlocation
 
 foreach ($Distro in $Distros) {
-    Write-Host "Importing distribution $Dist..." -ForegroundColor Cyan
-    $Output = wsl --import $Distro $InstallLocation "$($ExportLocation)/main-distro.tar"
+    Write-Host "Importing distribution $Distro..." -ForegroundColor Cyan
+    $Output = wsl --import $Distro "$($InstallLocation)\$($Distro)" "$($ExportLocation)/main-distro.tar"
     if ($LASTEXITCODE -ne 0) {
-        Write-Error "Error importing distribution: $Dist - $Output"
+        Write-Error "Error importing distribution: $Distro - $Output"
         $LASTEXITCODE = 0
         exit 1
     }
 
-    Write-Host "`nSuccessfully imported distribution: $Dist`n" -ForegroundColor Green
+    Write-Host "`nSuccessfully imported distribution: $Distro`n" -ForegroundColor Green
 }
 
 Write-Host "All distributions imported successfully" -ForegroundColor Green
