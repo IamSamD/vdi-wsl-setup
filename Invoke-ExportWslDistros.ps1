@@ -34,21 +34,18 @@ $Config = Get-Content -Path .\config.yaml | ConvertFrom-Yaml
 
 Write-Host "Config loaded`n" -ForegroundColor Green
 
-
-$Distros = @($Config.distros)
 $SeedDistro = $Config.export.seeddistro
 $ExportPath = $Config.export.exportpath
 
-foreach ($Distro in $Distros) {
-    Write-Host "Exporting distro $Distro" -ForegroundColor Cyan
-    $Output = wsl --export $SeedDistro "$($ExportPath)/$($Distro).tar"
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Failed to export distro: $Distro - $Output"
-        $LASTEXITCODE = 0
-        exit 1
-    }
-
-    Write-Host "`nSuccessful`n" -ForegroundColor Green 
+Write-Host "Exporting distro $SeedDistro" -ForegroundColor Cyan
+$Output = wsl --export $SeedDistro "$($ExportPath)/main-distro.tar"
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Failed to export distro: $Distro - $Output"
+    $LASTEXITCODE = 0
+    exit 1
 }
+
+Write-Host "`nSuccessful`n" -ForegroundColor Green 
+
 
 Write-Host "Successfully exported all distros to $ExportPath" -ForegroundColor Green
