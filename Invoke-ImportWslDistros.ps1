@@ -33,3 +33,20 @@ Write-Host "Loading config..." -ForegroundColor Cyan
 $Config = Get-Content -Path .\config.yaml | ConvertFrom-Yaml
 
 Write-Host "Config loaded`n" -ForegroundColor Green
+
+$Distros = @($Config.distros)
+$InstallLocation = $Config.import.installlocation
+
+foreach ($Distro in $Distros) {
+    Write-Host "Importing distribution $Dist..." -ForegroundColor Cyan
+    $Output = wsl --import $Dist $InstallLocation "$($Dist).tar"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Error importing distribution: $Dist - $Output"
+        $LASTEXITCODE = 0
+        exit 1
+    }
+
+    Write-Host "`nSuccessfully imported distribution: $Dist`n" -ForegroundColor Green
+}
+
+Write-Host "All distributions imported successfully" -ForegroundColor Green
