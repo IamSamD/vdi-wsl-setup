@@ -50,33 +50,33 @@ $TempPasswords = @{}
 $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
 
-foreach ($i in $Distros) {
-    $Password = -join ((1..6) | ForEach-Object { $characters[(Get-Random -Maximum $characters.Length)] })
+foreach ($Dist in $Distros) {
+    $Password = -join ((1..10) | ForEach-Object { $characters[(Get-Random -Maximum $characters.Length)] })
 
-    if ($SudoUsers -contains $i) {
-        $Output = wsl -d $i -u root -- bash -c "adduser --disabled-password --gecos '' $($i) && echo '$($i):$($password)' | chpasswd && usermod -aG sudo $($i)"
+    if ($SudoUsers -contains $Dist) {
+        $Output = wsl -d $Dist -u root -- bash -c "adduser --disabled-password --gecos '' $($Dist) && echo '$($Dist):$($Password)' | chpasswd && usermod -aG sudo $($Dist)"
         if ($LASTEXITCODE -ne 0) {
-            Write-Error "Error creating WSL user: $i - $Output"
+            Write-Error "Error creating WSL user: $Dist - $Output"
             $LASTEXITCODE = 0
             exit 1
         }
 
-        $TempPasswords[$i] = $Password
+        $TempPasswords[$Dist] = $Password
 
-        Write-Host "User and password created for $i" -ForegroundColor Cyan
-        Write-Host "User $i added to sudo group`n" -ForegroundColor Yellow
+        Write-Host "User and password created for $Dist" -ForegroundColor Cyan
+        Write-Host "User $Dist added to sudo group`n" -ForegroundColor Yellow
     } else {
 
-        $Output = wsl -d $i -u root -- bash -c "adduser --disabled-password --gecos '' $($i) && echo '$($i):$($password)' | chpasswd"
+        $Output = wsl -d $Dist -u root -- bash -c "adduser --disabled-password --gecos '' $($Dist) && echo '$($Dist):$($password)' | chpasswd"
         if ($LASTEXITCODE -ne 0) {
-            Write-Error "Error creating WSL user: $i - $Output"
+            Write-Error "Error creating WSL user: $Dist - $Output"
             $LASTEXITCODE = 0
             exit 1
         }
     
-        $TempPasswords[$i] = $Password
+        $TempPasswords[$Dist] = $Password
 
-        Write-Host "User and password created for $i`n" -ForegroundColor Cyan
+        Write-Host "User and password created for $Dist`n" -ForegroundColor Cyan
     }
 }
 
