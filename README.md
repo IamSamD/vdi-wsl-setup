@@ -21,9 +21,11 @@ Each script reads the same config file so you only have to specify your config o
 You can set all variables in **config.yaml**
 
 ``` yaml
-seeddistro:
-  name: Ubuntu-20.04
+export:
+  seeddistro: Ubuntu-20.04
   exportpath: C:\wsl-distros
+import:
+  installlocation: C:\install-location
 distros:
   - distro1
   - distro2
@@ -32,13 +34,17 @@ sudousers:
   - distro2
 ```
 
-`seeddistro.name`
+`export.seeddistro`
 
 The name of the WSL distribution you wish to export.
 
-`seeddistro.exportpath`
+`export.exportpath`
 
 The folder you wish to export the distribution to.
+
+`import.installlocation`
+
+The Windows folder in which the imported distributions should be installed.
 
 `distros`
 
