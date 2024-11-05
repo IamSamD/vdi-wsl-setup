@@ -1,6 +1,8 @@
-seeddistro:
-  name: Ubuntu-20.04
+export:
+  seeddistro: Ubuntu-20.04
   exportpath: C:\wsl-distros
+import:
+  installlocation: C:\install-location
 distros:
   - distro1
   - distro2

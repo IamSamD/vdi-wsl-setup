@@ -36,8 +36,8 @@ Write-Host "Config loaded`n" -ForegroundColor Green
 
 
 $Distros = @($Config.distros)
-$SeedDistro = $Config.seeddistro.name
-$ExportPath = $Config.seeddistro.exportpath
+$SeedDistro = $Config.export.seeddistro
+$ExportPath = $Config.export.exportpath
 
 foreach ($Distro in $Distros) {
     Write-Host "Exporting distro $Distro" -ForegroundColor Cyan
