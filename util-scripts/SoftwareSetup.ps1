@@ -38,7 +38,7 @@ if (-not(Test-Path "~/.nvm")) {
 # Setup chezmoi
 if (-not(Test-Path "~/.local/share/chezmoi")) {
     Write-Host "Installing chezmoi..." -ForegroundColor Cyan
-    $Output = bash -c /mnt/c/vdi-wsl-setup/setup-chezmoi.sh
+    $Output = bash -c /mnt/c/vdi-wsl-setup/util-scripts/setup-chezmoi.sh
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Error installing chezmoi: $Output"
         $LASTEXITCODE = 0
