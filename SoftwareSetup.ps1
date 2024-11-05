@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 # Install tfenv
-if (-net(Test-Path "~/.tfenv")) {
+if (-not(Test-Path "~/.tfenv")) {
     Write-Host "Installing tfenv..." -ForegroundColor Cyan
     $output = git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
     if ($LASTEXITCODE -ne 0) {
