@@ -70,7 +70,7 @@ After the main image has been configured the process of exporting the image, cre
 Once you are happy with the main image the process is as follows:
 
 Repo Location:
-The repo should be installed to C:\
+The repo should be cloned to C:\
 
 If the repo is already there, cd into it and perform a git pull.
 
@@ -81,7 +81,7 @@ Once the repo is there and up to date:
 - Set up your config file with the desired values
 - Run the scripts in the following order
 
-Check if there is already an export of the main distro, this will be called something like Ubuntu.tar.  If there is not already a main distro available:
+Check if there is already an export of the main distro, this will be called `main-distro.tar`.  If there is not already a main distro available:
 ``` powershell
 .\Invoke-ExportDistros.ps1
 ```
