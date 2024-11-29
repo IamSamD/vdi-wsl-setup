@@ -37,8 +37,8 @@ Write-Host "Config loaded`n" -ForegroundColor Green
 $Distros = @($Config.distros)
 
 foreach ($Distro in $Distros) {
-    Write-Host "Running software setup for distro: $Distro..." -ForegroundColor Cyan
-    $Output = wsl -d $Distro -u $Distro -- pwsh -c "/mnt/c/vdi-wsl-setup/util-scripts/SoftwareSetup.ps1"
+    Write-Host "Running software setup for distro: $($Distro.name)..." -ForegroundColor Cyan
+    $Output = wsl -d $Distro.name -u $Distro.name -- pwsh -c "/mnt/c/vdi-wsl-setup/util-scripts/SoftwareSetup.ps1"
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Error running software setup script: $Output"
         $LASTEXITCODE = 0

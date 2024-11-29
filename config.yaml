@@ -11,5 +11,4 @@ distros:
     pod: uk
 
 sudousers:
-  - name: sdpay
-    pod: uk
+  - sdpay
