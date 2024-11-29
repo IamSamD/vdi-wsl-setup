@@ -1,14 +1,47 @@
 export:
-  seeddistro: Ubuntu
+  seeddistro: Ubuntu-24.04
   exportpath: C:\Ubuntu
 import:
   installlocation: C:\Users
 distros:
   #UK Pod
-  - name: mhpay
-    pod: uk
   - name: sdpay
     pod: uk
+  - name: smpay
+    pod: uk
+  - name: mhpay
+    pod: uk
+  - name: gvpay
+    pod: uk
 
+  #India Pod
+  - name: vkpay
+    pod: in
+  - name: vikpay
+    pod: in
+  - name: mppay
+    pod: in
+  - name: rjpay
+    pod: in
+  - name: rmpay
+    pod: in
+
+  #US Pod
+  - name: cwpay
+    pod: us
+  - name: cypay
+    pod: us
+  - name: hvpay
+    pod: us
+  
 sudousers:
+  #UK Pod
   - sdpay
+  - smpay
+
+  #India Pod
+  - vkpay
+  - vikpay
+  - mppay
+  - rjpay
+  - rmpay
