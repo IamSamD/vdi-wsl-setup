@@ -40,7 +40,8 @@ $InstallLocation = $Config.import.installlocation
 
 foreach ($Distro in $Distros) {
     Write-Host "Importing distribution $Distro..." -ForegroundColor Cyan
-    $Output = wsl --import $Distro "$($InstallLocation)\$($Distro)" "$($ExportLocation)/main-distro.tar"
+    $UserFolder = "$($Distro.name).$($Distro.pod)"
+    $Output = wsl --import $Distro.name "$($InstallLocation)\$($UserFolder)" "$($ExportLocation)/main-distro.tar"
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Error importing distribution: $Distro - $Output"
         $LASTEXITCODE = 0

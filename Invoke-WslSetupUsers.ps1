@@ -53,30 +53,30 @@ $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 foreach ($Dist in $Distros) {
     $Password = -join ((1..10) | ForEach-Object { $characters[(Get-Random -Maximum $characters.Length)] })
 
-    if ($SudoUsers -contains $Dist) {
-        $Output = wsl -d $Dist -u root -- bash -c "adduser --disabled-password --gecos '' $($Dist) && echo '$($Dist):$($Password)' | chpasswd && usermod -aG sudo $($Dist)"
+    if ($SudoUsers -contains $Dist.name) {
+        $Output = wsl -d $Dist.name -u root -- bash -c "adduser --disabled-password --gecos '' $($Dist.name) && echo '$($Dist.name):$($Password)' | chpasswd && usermod -aG sudo $($Dist.name)"
         if ($LASTEXITCODE -ne 0) {
-            Write-Error "Error creating WSL user: $Dist - $Output"
+            Write-Error "Error creating WSL user: $($Dist.name) - $Output"
             $LASTEXITCODE = 0
             exit 1
         }
 
-        $TempPasswords[$Dist] = $Password
+        $TempPasswords[$Dist.name] = $Password
 
-        Write-Host "User and password created for $Dist" -ForegroundColor Cyan
-        Write-Host "User $Dist added to sudo group`n" -ForegroundColor Yellow
+        Write-Host "User and password created for $($Dist.name)" -ForegroundColor Cyan
+        Write-Host "User $($Dist.name) added to sudo group`n" -ForegroundColor Yellow
     } else {
 
-        $Output = wsl -d $Dist -u root -- bash -c "adduser --disabled-password --gecos '' $($Dist) && echo '$($Dist):$($password)' | chpasswd"
+        $Output = wsl -d $Dist.name -u root -- bash -c "adduser --disabled-password --gecos '' $($Dist.name) && echo '$($Dist.name):$($password)' | chpasswd"
         if ($LASTEXITCODE -ne 0) {
-            Write-Error "Error creating WSL user: $Dist - $Output"
+            Write-Error "Error creating WSL user: $($Dist.name) - $Output"
             $LASTEXITCODE = 0
             exit 1
         }
     
-        $TempPasswords[$Dist] = $Password
+        $TempPasswords[$Dist.name] = $Password
 
-        Write-Host "User and password created for $Dist`n" -ForegroundColor Cyan
+        Write-Host "User and password created for $($Dist.name)`n" -ForegroundColor Cyan
     }
 }
 
