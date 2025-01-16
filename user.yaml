@@ -1,0 +1,6 @@
+distros:
+  - name: sdpay
+    pod: uk
+    
+sudousers:
+  - sdpay
