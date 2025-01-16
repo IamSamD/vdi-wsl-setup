@@ -31,7 +31,7 @@ Write-Host "Required modules imported`n" -ForegroundColor Green
 # Load config
 Write-Host "Loading config..." -ForegroundColor Cyan
 
-$Users = Get-Content -Path .\users.yaml | ConvertFrom-Yaml
+$Users = Get-Content -Path .\user.yaml | ConvertFrom-Yaml
 
 Write-Host "Config loaded`n" -ForegroundColor Green
 
