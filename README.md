@@ -25,10 +25,11 @@ export:
 import:
   installlocation: C:\install-location
 distros:
-  - distro1
-  - distro2
+  - name: distro1
+    pod: uk
+  - name: distro2
+    pod: uk
 sudousers:
-  - user1
   - distro2
 ```
 

@@ -31,13 +31,13 @@ Write-Host "Required modules imported`n" -ForegroundColor Green
 # Load config
 Write-Host "Loading config..." -ForegroundColor Cyan
 
-$Config = Get-Content -Path .\config.yaml | ConvertFrom-Yaml
+$Users = Get-Content -Path .\users.yaml | ConvertFrom-Yaml
 
 Write-Host "Config loaded`n" -ForegroundColor Green
 
 
-$Distros = @($Config.distros)
-$SudoUsers = @($Config.sudousers)
+$Distros = @($Users.distros)
+$SudoUsers = @($Users.sudousers)
 
 if ($SudoUsers.Length -gt $Distros.Length) {
     Write-Error "You have more sudo users than distros"

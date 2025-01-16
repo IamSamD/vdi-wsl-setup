@@ -30,11 +30,11 @@ Write-Host "Required modules imported`n" -ForegroundColor Green
 # Load config
 Write-Host "Loading config..." -ForegroundColor Cyan
 
-$Config = Get-Content -Path .\config.yaml | ConvertFrom-Yaml
+$Users = Get-Content -Path .\user.yaml | ConvertFrom-Yaml
 
 Write-Host "Config loaded`n" -ForegroundColor Green
 
-$Distros = @($Config.distros)
+$Distros = @($Users.distros)
 
 foreach ($Distro in $Distros) {
     Write-Host "Running software setup for distro: $($Distro.name)..." -ForegroundColor Cyan
