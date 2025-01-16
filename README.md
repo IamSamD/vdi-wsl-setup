@@ -8,15 +8,19 @@ To acheive this we create a 'main' distribution which we configure with the init
 
 We export the main distribution. 
 
-We then import a distribution for each user and run scripts via WSL to set up the user in their distro and the local software they need. 
+Each user can then run the scripts under their own account on the VDI to set up their own WSL distribution. 
 
-If a user is as admin and should have sudo on their distribution, you can add them to the `sudousers` list in the config file. 
+If a user is as admin and should have sudo on their distribution, you can add them to the `sudousers` list in the `user.yaml` file. 
 
 Each script reads the same config file so you only have to specify your config once to run all scripts. 
 
-## Config File
+## Config Files
 
-You can set all variables in **config.yaml**
+There are two config files. `config.yaml` & `user.yaml`
+
+## `config.yaml` defines the base config and should not often need to be amended. 
+
+You can set base config used by the Export and Import scripts in **config.yaml**
 
 ``` yaml
 export:
@@ -24,13 +28,6 @@ export:
   exportpath: C:\wsl-distros
 import:
   installlocation: C:\install-location
-distros:
-  - name: distro1
-    pod: uk
-  - name: distro2
-    pod: uk
-sudousers:
-  - distro2
 ```
 
 `export.seeddistro`
@@ -44,6 +41,16 @@ The folder you wish to export the distribution to.
 `import.installlocation`
 
 The Windows folder in which the imported distributions should be installed.
+
+## `user.yaml` is used to specify config for your own WSL Distro
+
+```yaml
+distros:
+  - name: distro1
+    pod: uk
+sudousers:
+  - distro1
+```
 
 `distros`
 
@@ -79,7 +86,7 @@ If the repo is not already there, cd into C:\ and perform `git clone https://git
 
 Once the repo is there and up to date:
 
-- Set up your config file with the desired values
+- Set up your `user.yaml` file with the desired values
 - Run the scripts in the following order
 
 Check if there is already an export of the main distro, this will be called `main-distro.tar`.  If there is not already a main distro available:
@@ -101,3 +108,6 @@ Set up local software for each distro
 ``` powershell
 .\Invoke-WslSetupSoftware.ps1
 ```
+
+There is a [runbook for setting up your WSL distro](https://dev.azure.com/PayUK/Pay.UK%20API%20Platform/_wiki/wikis/Pay.UK-API-Platform.wiki/892/0037-WSL-Distribution-Setup)
+Please refer to that for full instructions on how to set up your own WSL distro on the VDI
